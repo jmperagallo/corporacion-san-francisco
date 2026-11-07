@@ -1,7 +1,9 @@
 // app/components/Footer.tsx
+"use client"; // <-- ESTA LÍNEA SOLUCIONA EL ERROR DE VERCEL
+
 import Link from "next/link";
-import { MapPin, Globe } from "lucide-react"; // Dejamos solo los que sí existen
-import { FaInstagram, FaFacebook } from "react-icons/fa"; // <-- Nueva importación
+import { MapPin, Globe } from "lucide-react"; 
+import { FaInstagram, FaFacebook } from "react-icons/fa"; 
 
 export default function Footer() {
   return (
