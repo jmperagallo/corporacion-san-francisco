@@ -1,11 +1,20 @@
 // app/components/Footer.tsx
-"use client"; // <-- ESTA LÍNEA SOLUCIONA EL ERROR DE VERCEL
+"use client"; 
 
+import { useState, useEffect } from "react"; // <-- Importamos los hooks
 import Link from "next/link";
 import { MapPin, Globe } from "lucide-react"; 
 import { FaInstagram, FaFacebook } from "react-icons/fa"; 
 
 export default function Footer() {
+  // Iniciamos el año vacío
+  const [year, setYear] = useState("");
+
+  // Este código se ejecuta SOLO en el navegador del usuario
+  useEffect(() => {
+    setYear(new Date().getFullYear().toString());
+  }, []);
+
   return (
     <footer className="bg-cafe-patrimonial text-marfil py-12 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -45,7 +54,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="mt-12 pt-8 border-t border-arena/20 text-center text-xs text-marfil/60">
-        © {new Date().getFullYear()} Corporación San Francisco. Todos los derechos reservados.
+        © {year} Corporación San Francisco. Todos los derechos reservados.
       </div>
     </footer>
   );
