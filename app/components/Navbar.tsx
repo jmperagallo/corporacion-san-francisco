@@ -18,66 +18,63 @@ export default function Navbar() {
   ];
 
   return (
-    // Aquí agregamos la imagen de fondo (bg-[url]) y una capa oscura encima para legibilidad
-    <nav className="sticky top-0 z-50 shadow-md bg-cafe-patrimonial bg-[url('/navbar-bg.jpg')] bg-cover bg-center relative">
+    // 1. Contenedor principal: 'fixed' para que flote, centrado y con margen superior
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       
-      {/* Capa oscura semitransparente para asegurar que el texto blanco se lea bien */}
-      <div className="absolute inset-0 bg-cafe-patrimonial/80"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex justify-between items-center h-24">
-          
-          {/* Logo y Nombre */}
-          <Link href="/" className="flex items-center gap-3">
-            {/* Le quitamos el fondo blanco al logo porque el navbar ya es oscuro */}
+      {/* 2. La "Píldora" flotante: Fondo oscuro semitransparente, blur y bordes redondeados */}
+      <nav className="bg-cafe-patrimonial/85 backdrop-blur-md rounded-full shadow-2xl border border-white/10 px-6 py-3 flex justify-between items-center transition-all duration-300">
+        
+        {/* Logo y Nombre */}
+        <Link href="/" className="flex items-center gap-3">
+          <div className="bg-white/10 p-1.5 rounded-full">
             <Image 
               src="/logo.png" 
               alt="Logo Corporación San Francisco" 
-              width={60} 
-              height={60} 
-              className="object-contain drop-shadow-md"
+              width={40} 
+              height={40} 
+              className="object-contain"
             />
-            <span className="font-bold text-lg text-white hidden sm:block leading-tight drop-shadow-md">
-              Corporación<br/>San Francisco
-            </span>
-          </Link>
+          </div>
+          <span className="font-bold text-sm sm:text-base text-white hidden sm:block leading-tight tracking-wide">
+            Corporación<br/>San Francisco
+          </span>
+        </Link>
 
-          {/* Menú Escritorio (Textos blancos) */}
-          <div className="hidden md:flex gap-8 items-center font-semibold text-white">
-            {links.map((link) => (
-              <Link key={link.name} href={link.href} className="hover:text-arena transition-colors drop-shadow-sm">
-                {link.name}
-              </Link>
-            ))}
-            <Link href="/visitanos" className="bg-terracota text-white px-6 py-2.5 rounded-md hover:bg-white hover:text-cafe-patrimonial transition-colors shadow-lg border border-terracota/50">
-              Visítanos
+        {/* Menú Escritorio */}
+        <div className="hidden md:flex gap-6 items-center font-medium text-sm text-white/90">
+          {links.map((link) => (
+            <Link key={link.name} href={link.href} className="hover:text-arena transition-colors">
+              {link.name}
             </Link>
-          </div>
-
-          {/* Botón Menú Móvil (Blanco) */}
-          <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-arena drop-shadow-md">
-              {isOpen ? <X size={32} /> : <Menu size={32} />}
-            </button>
-          </div>
+          ))}
+          <Link href="/visitanos" className="bg-terracota text-white px-5 py-2 rounded-full hover:bg-arena hover:text-cafe-patrimonial transition-colors shadow-md ml-2">
+            Visítanos
+          </Link>
         </div>
-      </div>
 
-      {/* Menú Móvil Desplegable */}
+        {/* Botón Menú Móvil */}
+        <div className="md:hidden flex items-center">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-arena p-1">
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Menú Móvil Desplegable (Flota justo debajo de la píldora) */}
       {isOpen && (
-        <div className="md:hidden bg-cafe-patrimonial/95 backdrop-blur-md border-t border-white/10 absolute w-full z-20">
-          <div className="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+        <div className="md:hidden mt-2 bg-cafe-patrimonial/95 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
+          <div className="px-4 py-4 space-y-2">
             {links.map((link) => (
-              <Link key={link.name} href={link.href} className="block px-3 py-3 rounded-md text-base font-medium text-white hover:bg-white/10 hover:text-arena">
+              <Link key={link.name} href={link.href} className="block px-4 py-2 rounded-xl text-base font-medium text-white hover:bg-white/10 hover:text-arena transition-colors">
                 {link.name}
               </Link>
             ))}
-            <Link href="/visitanos" className="block px-3 py-3 mt-2 rounded-md text-base font-bold text-center text-white bg-terracota hover:bg-white hover:text-cafe-patrimonial">
+            <Link href="/visitanos" className="block px-4 py-3 mt-2 rounded-xl text-base font-bold text-center text-white bg-terracota hover:bg-arena hover:text-cafe-patrimonial transition-colors">
               Visítanos
             </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }
