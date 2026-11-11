@@ -21,9 +21,9 @@ export default function Navbar() {
     <header className="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       
       {/* La "Píldora" flotante con efecto de cristal transparente */}
-      <nav className="relative overflow-hidden rounded-full shadow-2xl border border-white/20 px-6 py-4 md:py-5 flex justify-between items-center">
+      <nav className="relative overflow-hidden rounded-full shadow-2xl border border-white/20 px-4 py-2 flex justify-between items-center">
         
-        {/* 1. Imagen de Fondo (navbar-bg.jpg) con opacidad MUY BAJA */}
+        {/* 1. Imagen de Fondo (navbar-bg.jpg) */}
         <div className="absolute inset-0 bg-[url('/navbar-bg.jpg')] bg-cover bg-center opacity-30"></div>
         
         {/* 2. Capa oscura semitransparente + Desenfoque */}
@@ -32,38 +32,37 @@ export default function Navbar() {
         {/* 3. Contenido del Navbar */}
         <div className="relative z-10 flex justify-between items-center w-full">
           
-          {/* Logo y Nombre */}
-          <Link href="/" className="flex items-center gap-3">
-            <div className="bg-white/10 p-1.5 rounded-full border border-white/20">
+          {/* LOGO HORIZONTAL CON FONDO BLANCO */}
+          <Link href="/" className="flex items-center">
+            {/* Contenedor blanco para que resalte el logo oscuro */}
+            <div className="bg-white px-4 py-2 rounded-full shadow-md hover:scale-105 transition-transform duration-300">
               <Image 
-                src="/logo.png" 
-                alt="Logo Corporación San Francisco" 
-                width={50} // Logo un poco más grande
-                height={50} 
-                className="object-contain"
+                src="/logohortra.png" 
+                alt="Corporación San Francisco" 
+                width={200} // Ancho para formato horizontal
+                height={60} // Altura proporcional
+                className="object-contain h-10 md:h-12 w-auto" // h-10/h-12 controla la altura real
+                priority
               />
             </div>
-            <span className="font-bold text-xl md:text-2xl text-white hidden sm:block leading-tight tracking-wide drop-shadow-md">
-              Corporación<br/>San Francisco
-            </span>
           </Link>
 
-          {/* Menú Escritorio (Letras más grandes y botones más robustos) */}
+          {/* Menú Escritorio (Botones de cristal) */}
           <div className="hidden lg:flex gap-3 items-center text-white">
             {links.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href} 
-                className="px-5 py-2.5 rounded-full bg-white/10 border border-white/20 hover:bg-white/25 hover:border-white/40 hover:text-arena transition-all duration-300 text-base md:text-lg font-medium shadow-sm"
+                className="px-5 py-2.5 rounded-full bg-white/10 border border-white/20 hover:bg-white/25 hover:border-white/40 hover:text-arena transition-all duration-300 text-base font-medium shadow-sm"
               >
                 {link.name}
               </Link>
             ))}
             
-            {/* Botón Destacado Visítanos (Más grande) */}
+            {/* Botón Destacado Visítanos */}
             <Link 
               href="/visitanos" 
-              className="bg-terracota text-white px-7 py-2.5 ml-2 rounded-full hover:bg-white hover:text-cafe-patrimonial transition-all shadow-lg border border-terracota/50 font-bold text-base md:text-lg"
+              className="bg-terracota text-white px-7 py-2.5 ml-2 rounded-full hover:bg-white hover:text-cafe-patrimonial transition-all shadow-lg border border-terracota/50 font-bold text-base"
             >
               Visítanos
             </Link>
@@ -71,8 +70,8 @@ export default function Navbar() {
 
           {/* Botón Menú Móvil */}
           <div className="lg:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-arena p-1">
-              {isOpen ? <X size={36} /> : <Menu size={36} />}
+            <button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-arena p-2 bg-white/10 rounded-full border border-white/20">
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -80,7 +79,7 @@ export default function Navbar() {
 
       {/* Menú Móvil Desplegable */}
       {isOpen && (
-        <div className="lg:hidden mt-2 bg-cafe-patrimonial/80 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
+        <div className="lg:hidden mt-2 bg-cafe-patrimonial/90 backdrop-blur-xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
           <div className="px-4 py-5 space-y-3">
             {links.map((link) => (
               <Link 
