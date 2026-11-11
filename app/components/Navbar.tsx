@@ -20,19 +20,19 @@ export default function Navbar() {
   return (
     <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       
-      {/* La "Píldora" flotante con efecto Cielo */}
+      {/* La "Píldora" flotante con Fondo Cielo */}
       <nav className="relative overflow-hidden rounded-full shadow-xl border border-white/60 px-6 py-3 md:py-4 flex justify-between items-center">
         
-        {/* 1. Fondo de Cielo (Degradado que simula nubes suaves) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-sky-100 to-blue-50"></div>
+        {/* 1. Tu imagen real de cielo */}
+        <div className="absolute inset-0 bg-[url('/cielo-bg.jpg')] bg-cover bg-center"></div>
         
-        {/* 2. Un toque de desenfoque para que se vea como cristal empañado */}
-        <div className="absolute inset-0 backdrop-blur-md bg-white/20"></div>
+        {/* 2. Capa blanca/marfil para que el logo y textos resalten (Efecto Cristal) */}
+        <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
 
         {/* 3. Contenido del Navbar */}
         <div className="relative z-10 flex justify-between items-center w-full">
           
-          {/* LOGO HORIZONTAL (Resalta perfecto sobre el cielo) */}
+          {/* LOGO HORIZONTAL */}
           <Link href="/" className="flex items-center hover:scale-105 transition-transform duration-300">
             <Image 
               src="/logohortra.png" 
@@ -50,8 +50,8 @@ export default function Navbar() {
               <Link 
                 key={link.name} 
                 href={link.href} 
-                // Botones con fondo blanco semitransparente
-                className="px-4 py-2 rounded-full bg-white/50 text-cafe-patrimonial hover:bg-white hover:shadow-sm transition-all duration-300 text-base font-semibold border border-white/60"
+                // Botones blancos semitransparentes
+                className="px-4 py-2 rounded-full bg-white/60 text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-all duration-300 text-base font-semibold border border-white/80 shadow-sm"
               >
                 {link.name}
               </Link>
@@ -77,7 +77,7 @@ export default function Navbar() {
 
       {/* Menú Móvil Desplegable */}
       {isOpen && (
-        <div className="lg:hidden mt-2 bg-white/90 backdrop-blur-xl rounded-3xl border border-sky-100 shadow-2xl overflow-hidden">
+        <div className="lg:hidden mt-2 bg-white/95 backdrop-blur-xl rounded-3xl border border-sky-100 shadow-2xl overflow-hidden">
           <div className="px-4 py-5 space-y-2">
             {links.map((link) => (
               <Link 
