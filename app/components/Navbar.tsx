@@ -20,26 +20,26 @@ export default function Navbar() {
   return (
     <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       
-      {/* La "Píldora" flotante */}
-      <nav className="relative overflow-hidden rounded-full shadow-xl border border-white/50 px-6 py-3 md:py-4 flex justify-between items-center">
+      {/* La "Píldora" flotante con efecto Cielo */}
+      <nav className="relative overflow-hidden rounded-full shadow-xl border border-white/60 px-6 py-3 md:py-4 flex justify-between items-center">
         
-        {/* 1. Imagen de Fondo (navbar-bg.jpg) */}
-        <div className="absolute inset-0 bg-[url('/navbar-bg.jpg')] bg-cover bg-center"></div>
+        {/* 1. Fondo de Cielo (Degradado que simula nubes suaves) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50 via-sky-100 to-blue-50"></div>
         
-        {/* 2. Capa clara semitransparente (Marfil) + Desenfoque para que resalte el logo café */}
-        <div className="absolute inset-0 bg-marfil/85 backdrop-blur-md"></div>
+        {/* 2. Un toque de desenfoque para que se vea como cristal empañado */}
+        <div className="absolute inset-0 backdrop-blur-md bg-white/20"></div>
 
         {/* 3. Contenido del Navbar */}
         <div className="relative z-10 flex justify-between items-center w-full">
           
-          {/* LOGO HORIZONTAL (Grande y sin fondo blanco) */}
+          {/* LOGO HORIZONTAL (Resalta perfecto sobre el cielo) */}
           <Link href="/" className="flex items-center hover:scale-105 transition-transform duration-300">
             <Image 
               src="/logohortra.png" 
               alt="Corporación San Francisco" 
               width={300} 
               height={100} 
-              className="object-contain h-14 md:h-20 w-auto" // Buen tamaño sin ser exagerado
+              className="object-contain h-14 md:h-20 w-auto drop-shadow-sm" 
               priority
             />
           </Link>
@@ -50,8 +50,8 @@ export default function Navbar() {
               <Link 
                 key={link.name} 
                 href={link.href} 
-                // Botones sutiles en color café
-                className="px-4 py-2 rounded-full bg-cafe-patrimonial/5 text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-all duration-300 text-base font-semibold border border-transparent hover:border-cafe-patrimonial"
+                // Botones con fondo blanco semitransparente
+                className="px-4 py-2 rounded-full bg-white/50 text-cafe-patrimonial hover:bg-white hover:shadow-sm transition-all duration-300 text-base font-semibold border border-white/60"
               >
                 {link.name}
               </Link>
@@ -77,13 +77,13 @@ export default function Navbar() {
 
       {/* Menú Móvil Desplegable */}
       {isOpen && (
-        <div className="lg:hidden mt-2 bg-marfil/95 backdrop-blur-xl rounded-3xl border border-arena/30 shadow-2xl overflow-hidden">
+        <div className="lg:hidden mt-2 bg-white/90 backdrop-blur-xl rounded-3xl border border-sky-100 shadow-2xl overflow-hidden">
           <div className="px-4 py-5 space-y-2">
             {links.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href} 
-                className="block px-4 py-3 rounded-2xl bg-cafe-patrimonial/5 text-lg font-bold text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-colors text-center"
+                className="block px-4 py-3 rounded-2xl bg-white text-lg font-bold text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-colors text-center border border-sky-50"
               >
                 {link.name}
               </Link>
