@@ -18,69 +18,79 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       
-      {/* Navbar 100% Transparente (Sin fondos, ni bordes, ni desenfoques) */}
-      <nav className="px-4 py-6 md:py-8 flex justify-between items-center transition-all duration-300">
+      {/* La "Píldora" flotante */}
+      <nav className="relative overflow-hidden rounded-full shadow-xl border border-white/50 px-6 py-3 md:py-4 flex justify-between items-center">
         
-        {/* LOGO HORIZONTAL AGRANDADO */}
-        <Link href="/" className="flex items-center hover:scale-105 transition-transform duration-300">
-          <Image 
-            src="/logohortra.png" 
-            alt="Corporación San Francisco" 
-            width={350} // Ancho aumentado
-            height={120} // Alto aumentado
-            className="object-contain h-16 md:h-24 w-auto drop-shadow-2xl" // Tamaño visual grande y sombra para resaltar
-            priority
-          />
-        </Link>
+        {/* 1. Imagen de Fondo (navbar-bg.jpg) */}
+        <div className="absolute inset-0 bg-[url('/navbar-bg.jpg')] bg-cover bg-center"></div>
+        
+        {/* 2. Capa clara semitransparente (Marfil) + Desenfoque para que resalte el logo café */}
+        <div className="absolute inset-0 bg-marfil/85 backdrop-blur-md"></div>
 
-        {/* Menú Escritorio */}
-        <div className="hidden lg:flex gap-4 items-center">
-          {links.map((link) => (
-            <Link 
-              key={link.name} 
-              href={link.href} 
-              // Texto blanco con sombra para que resalte sobre cualquier imagen
-              className="px-4 py-2 rounded-full text-white hover:text-arena transition-all duration-300 text-base font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-            >
-              {link.name}
-            </Link>
-          ))}
+        {/* 3. Contenido del Navbar */}
+        <div className="relative z-10 flex justify-between items-center w-full">
           
-          {/* Botón Destacado Visítanos */}
-          <Link 
-            href="/visitanos" 
-            className="bg-terracota text-white px-7 py-2.5 ml-2 rounded-full hover:bg-white hover:text-cafe-patrimonial transition-all shadow-xl font-bold text-base border border-terracota/50"
-          >
-            Visítanos
+          {/* LOGO HORIZONTAL (Grande y sin fondo blanco) */}
+          <Link href="/" className="flex items-center hover:scale-105 transition-transform duration-300">
+            <Image 
+              src="/logohortra.png" 
+              alt="Corporación San Francisco" 
+              width={300} 
+              height={100} 
+              className="object-contain h-14 md:h-20 w-auto" // Buen tamaño sin ser exagerado
+              priority
+            />
           </Link>
-        </div>
 
-        {/* Botón Menú Móvil */}
-        <div className="lg:hidden flex items-center">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-white hover:text-arena p-2 drop-shadow-lg">
-            {isOpen ? <X size={36} /> : <Menu size={36} />}
-          </button>
-        </div>
-      </nav>
-
-      {/* Menú Móvil Desplegable (Este sí necesita fondo para poder leerlo) */}
-      {isOpen && (
-        <div className="lg:hidden mt-2 bg-cafe-patrimonial/95 backdrop-blur-md rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
-          <div className="px-4 py-5 space-y-3">
+          {/* Menú Escritorio */}
+          <div className="hidden lg:flex gap-2 items-center">
             {links.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href} 
-                className="block px-4 py-3 rounded-full bg-white/10 text-lg font-medium text-white hover:bg-white/20 hover:text-arena transition-colors text-center"
+                // Botones sutiles en color café
+                className="px-4 py-2 rounded-full bg-cafe-patrimonial/5 text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-all duration-300 text-base font-semibold border border-transparent hover:border-cafe-patrimonial"
+              >
+                {link.name}
+              </Link>
+            ))}
+            
+            {/* Botón Destacado Visítanos */}
+            <Link 
+              href="/visitanos" 
+              className="bg-terracota text-white px-6 py-2.5 ml-2 rounded-full hover:bg-cafe-patrimonial transition-all shadow-md font-bold text-base"
+            >
+              Visítanos
+            </Link>
+          </div>
+
+          {/* Botón Menú Móvil */}
+          <div className="lg:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-cafe-patrimonial hover:text-terracota p-2 transition-colors">
+              {isOpen ? <X size={32} /> : <Menu size={32} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Menú Móvil Desplegable */}
+      {isOpen && (
+        <div className="lg:hidden mt-2 bg-marfil/95 backdrop-blur-xl rounded-3xl border border-arena/30 shadow-2xl overflow-hidden">
+          <div className="px-4 py-5 space-y-2">
+            {links.map((link) => (
+              <Link 
+                key={link.name} 
+                href={link.href} 
+                className="block px-4 py-3 rounded-2xl bg-cafe-patrimonial/5 text-lg font-bold text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-colors text-center"
               >
                 {link.name}
               </Link>
             ))}
             <Link 
               href="/visitanos" 
-              className="block px-4 py-3.5 mt-3 rounded-full text-lg font-bold text-center text-white bg-terracota hover:bg-arena hover:text-cafe-patrimonial transition-colors shadow-md"
+              className="block px-4 py-3.5 mt-3 rounded-2xl text-lg font-bold text-center text-white bg-terracota hover:bg-cafe-patrimonial transition-colors shadow-md"
             >
               Visítanos
             </Link>
