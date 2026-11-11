@@ -21,60 +21,53 @@ export default function Navbar() {
     <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
       
       {/* 
-        NAVBAR ASIMÉTRICO:
-        - rounded-l-[3rem] hace que el lado izquierdo sea una curva muy amplia.
-        - rounded-r-2xl hace que el lado derecho sea más cuadrado/compacto.
-        - pl-8 pr-4: más espacio a la izquierda para el logo, menos a la derecha.
+        NAVBAR SIMÉTRICO Y CÁLIDO:
+        - Fondo Marfil con 90% de opacidad y desenfoque (efecto cristal cálido).
+        - Borde muy sutil en color Arena.
       */}
-      <nav className="relative overflow-hidden rounded-l-[3rem] rounded-r-2xl shadow-2xl border border-white/60 pl-8 pr-4 py-2 md:py-3 flex justify-between items-center">
+      <nav className="relative overflow-hidden rounded-full shadow-lg border border-[#D7B98A]/50 px-6 py-2 md:py-3 flex justify-between items-center bg-[#F5F0E7]/90 backdrop-blur-md">
         
-        {/* 1. Tu imagen real de cielo */}
-        <div className="absolute inset-0 bg-[url('/cielo-bg.jpg')] bg-cover bg-center"></div>
-        
-        {/* 2. Capa blanca/marfil para legibilidad */}
-        <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
-
-        {/* 3. Contenido del Navbar */}
+        {/* Contenido del Navbar */}
         <div className="relative z-10 flex justify-between items-center w-full">
           
-          {/* LADO IZQUIERDO: LOGO GRANDE */}
+          {/* LOGO HORIZONTAL */}
           <Link href="/" className="flex items-center hover:scale-105 transition-transform duration-300">
             <Image 
               src="/logohortra.png" 
               alt="Corporación San Francisco" 
               width={300} 
               height={100} 
-              // h-16 en móvil, h-20 en escritorio. Dale fuerza al logo.
-              className="object-contain h-16 md:h-20 w-auto drop-shadow-sm" 
+              // Tamaño equilibrado: h-12 en móvil, h-16 en escritorio
+              className="object-contain h-12 md:h-16 w-auto" 
               priority
             />
           </Link>
 
-          {/* LADO DERECHO: BOTONES COMPACTOS */}
-          <div className="hidden lg:flex gap-1.5 items-center">
+          {/* Menú Escritorio */}
+          <div className="hidden lg:flex gap-2 items-center">
             {links.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href} 
-                // py-1.5 los hace más bajos (delgados) que el logo
-                className="px-4 py-1.5 rounded-full bg-white/50 text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-all duration-300 text-sm font-bold border border-white/60"
+                // Botones con hover en Café Patrimonial
+                className="px-4 py-2 rounded-full text-[#59382F] hover:bg-[#59382F] hover:text-[#F5F0E7] transition-all duration-300 text-base font-bold"
               >
                 {link.name}
               </Link>
             ))}
             
-            {/* Botón Destacado Visítanos */}
+            {/* Botón Destacado Visítanos (Terracota) */}
             <Link 
               href="/visitanos" 
-              className="bg-terracota text-white px-5 py-1.5 ml-1 rounded-full hover:bg-cafe-patrimonial transition-all shadow-md font-bold text-sm"
+              className="bg-[#A95035] text-white px-6 py-2 ml-2 rounded-full hover:bg-[#59382F] transition-all shadow-md font-bold text-base"
             >
               Visítanos
             </Link>
           </div>
 
           {/* Botón Menú Móvil */}
-          <div className="lg:hidden flex items-center pr-2">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-cafe-patrimonial hover:text-terracota p-2 transition-colors">
+          <div className="lg:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-[#59382F] hover:text-[#A95035] p-2 transition-colors">
               {isOpen ? <X size={32} /> : <Menu size={32} />}
             </button>
           </div>
@@ -83,20 +76,20 @@ export default function Navbar() {
 
       {/* Menú Móvil Desplegable */}
       {isOpen && (
-        <div className="lg:hidden mt-2 bg-white/95 backdrop-blur-xl rounded-2xl border border-sky-100 shadow-2xl overflow-hidden">
+        <div className="lg:hidden mt-2 bg-[#F5F0E7]/95 backdrop-blur-xl rounded-3xl border border-[#D7B98A]/50 shadow-2xl overflow-hidden">
           <div className="px-4 py-5 space-y-2">
             {links.map((link) => (
               <Link 
                 key={link.name} 
                 href={link.href} 
-                className="block px-4 py-3 rounded-xl bg-white text-lg font-bold text-cafe-patrimonial hover:bg-cafe-patrimonial hover:text-white transition-colors text-center border border-sky-50"
+                className="block px-4 py-3 rounded-2xl text-lg font-bold text-[#59382F] hover:bg-[#59382F] hover:text-[#F5F0E7] transition-colors text-center"
               >
                 {link.name}
               </Link>
             ))}
             <Link 
               href="/visitanos" 
-              className="block px-4 py-3.5 mt-3 rounded-xl text-lg font-bold text-center text-white bg-terracota hover:bg-cafe-patrimonial transition-colors shadow-md"
+              className="block px-4 py-3.5 mt-3 rounded-2xl text-lg font-bold text-center text-white bg-[#A95035] hover:bg-[#59382F] transition-colors shadow-md"
             >
               Visítanos
             </Link>
