@@ -20,18 +20,18 @@ export default function Navbar() {
   return (
     <header className="fixed top-4 md:top-6 left-0 w-full px-4 md:px-8 z-50 flex justify-between items-start pointer-events-none">
       
-      {/* 1. CÍRCULO DEL LOGO (Mismo tamaño exterior) */}
+      {/* 1. CÍRCULO DEL LOGO */}
       <Link 
         href="/" 
-        className="pointer-events-auto bg-[#F5F0E7]/90 backdrop-blur-md border-2 border-[#D7B98A]/50 rounded-full w-32 h-32 md:w-48 md:h-48 flex items-center justify-center shadow-2xl hover:scale-105 transition-transform duration-300"
+        className="pointer-events-auto bg-[#F5F0E7]/90 backdrop-blur-md border-2 border-[#D7B98A]/50 rounded-full w-32 h-32 md:w-48 md:h-48 flex items-center justify-center shadow-2xl hover:scale-105 transition-transform duration-300 overflow-hidden"
       >
         <Image 
           src="/logo-transparente.png" 
           alt="Corporación San Francisco" 
-          width={250} // Aumentamos el width base
+          width={250} 
           height={250} 
-          // AQUÍ ESTÁ LA MAGIA: w-[120px] y md:w-[180px] ocupa casi todo el círculo
-          className="object-contain w-[120px] h-[120px] md:w-[180px] md:h-[180px] drop-shadow-md" 
+          // Redujimos un poco el tamaño (w-28 y md:w-40) y agregamos un padding inferior (pb-2)
+          className="object-contain w-28 h-28 md:w-40 md:h-40 pb-2 drop-shadow-md" 
           priority
         />
       </Link>
