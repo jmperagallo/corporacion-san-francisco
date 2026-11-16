@@ -1,16 +1,14 @@
 // app/components/Footer.tsx
 "use client"; 
 
-import { useState, useEffect } from "react"; // <-- Importamos los hooks
+import { useState, useEffect } from "react"; 
 import Link from "next/link";
 import { MapPin, Globe } from "lucide-react"; 
 import { FaInstagram, FaFacebook } from "react-icons/fa"; 
 
 export default function Footer() {
-  // Iniciamos el año vacío
   const [year, setYear] = useState("");
 
-  // Este código se ejecuta SOLO en el navegador del usuario
   useEffect(() => {
     setYear(new Date().getFullYear().toString());
   }, []);
@@ -52,9 +50,21 @@ export default function Footer() {
 
       </div>
 
-      {/* Copyright */}
-      <div className="mt-12 pt-8 border-t border-arena/20 text-center text-xs text-marfil/60">
-        © {year} Corporación San Francisco. Todos los derechos reservados.
+      {/* Copyright y Crédito de Diseño */}
+      <div className="mt-12 pt-8 border-t border-arena/20 flex flex-col md:flex-row items-center justify-center gap-2 text-center text-xs text-marfil/60">
+        <span>© {year} Corporación San Francisco. Todos los derechos reservados.</span>
+        <span className="hidden md:inline">·</span>
+        <span>
+          Diseño y desarrollo por{" "}
+          <a 
+            href="https://www.iamaker.cl" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="font-semibold text-arena hover:text-terracota transition-colors underline decoration-arena/50 underline-offset-2"
+          >
+            iamaker
+          </a>
+        </span>
       </div>
     </footer>
   );
