@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react"; 
 import Link from "next/link";
+import Image from "next/image"; 
 import { MapPin, Globe } from "lucide-react"; 
 import { FaInstagram, FaFacebook } from "react-icons/fa"; 
 
@@ -50,21 +51,36 @@ export default function Footer() {
 
       </div>
 
-      {/* Copyright y Crédito de Diseño */}
-      <div className="mt-12 pt-8 border-t border-arena/20 flex flex-col md:flex-row items-center justify-center gap-2 text-center text-xs text-marfil/60">
+      {/* Copyright y Crédito de Diseño con Logo */}
+      <div className="mt-12 pt-8 border-t border-arena/20 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-center text-xs text-marfil/60">
+        
         <span>© {year} Corporación San Francisco. Todos los derechos reservados.</span>
+        
         <span className="hidden md:inline">·</span>
-        <span>
-          Diseño y desarrollo por{" "}
+        
+        {/* ENLACE CON EL LOGO DE IAMAKER */}
+        <div className="flex items-center gap-3">
+          <span>Diseño y desarrollo por</span>
           <a 
             href="https://www.iamaker.cl" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="font-semibold text-arena hover:text-terracota transition-colors underline decoration-arena/50 underline-offset-2"
+            className="group"
+            title="Visitar iamaker.cl"
           >
-            iamaker
+            <Image 
+              src="/Logo_IAMaker-transparente.png" // <-- Nombre exacto de tu archivo
+              alt="iamaker" 
+              width={120} 
+              height={40} 
+              // Ajusté la altura a h-7 para que se vea un poco más grande y legible.
+              // SI EL LOGO ES OSCURO, descomenta la siguiente clase quitando los dos '//':
+              // className="object-contain h-7 w-auto opacity-70 group-hover:opacity-100 transition-all duration-300 brightness-0 invert" 
+              className="object-contain h-7 w-auto opacity-70 group-hover:opacity-100 transition-all duration-300" 
+            />
           </a>
-        </span>
+        </div>
+
       </div>
     </footer>
   );
