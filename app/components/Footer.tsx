@@ -52,15 +52,15 @@ export default function Footer() {
       </div>
 
       {/* Copyright y Crédito de Diseño con Logo */}
-      <div className="mt-12 pt-8 border-t border-arena/20 flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 text-center text-xs text-marfil/60">
+      <div className="mt-12 pt-8 border-t border-arena/20 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center text-xs text-marfil/60">
         
         <span>© {year} Corporación San Francisco. Todos los derechos reservados.</span>
         
-        <span className="hidden md:inline">·</span>
+        <span className="hidden md:inline text-lg">·</span>
         
-        {/* ENLACE CON EL LOGO DE IAMAKER */}
+        {/* ENLACE CON EL LOGO DE IAMAKER - ¡MÁS GRANDE! */}
         <div className="flex items-center gap-3">
-          <span>Diseño y desarrollo por</span>
+          <span className="text-sm">Diseño y desarrollo por</span>
           <a 
             href="https://www.iamaker.cl" 
             target="_blank" 
@@ -69,14 +69,15 @@ export default function Footer() {
             title="Visitar iamaker.cl"
           >
             <Image 
-              src="/Logo_IAMaker-transparente.png" // <-- Nombre exacto de tu archivo
+              src="/Logo_IAMaker-transparente.png" 
               alt="iamaker" 
-              width={120} 
-              height={40} 
-              // Ajusté la altura a h-7 para que se vea un poco más grande y legible.
-              // SI EL LOGO ES OSCURO, descomenta la siguiente clase quitando los dos '//':
-              // className="object-contain h-7 w-auto opacity-70 group-hover:opacity-100 transition-all duration-300 brightness-0 invert" 
-              className="object-contain h-7 w-auto opacity-70 group-hover:opacity-100 transition-all duration-300" 
+              width={160} // Aumentamos las dimensiones base
+              height={60} 
+              // h-12 (48px) en lugar de h-7. Se ve mucho más imponente.
+              className="object-contain h-10 md:h-12 w-auto opacity-80 group-hover:opacity-100 transition-all duration-300" 
+              
+              // SI EL LOGO SE VE MUY OSCURO, DESCOMENTA LA SIGUIENTE LÍNEA Y BORRA LA DE ARRIBA:
+              // className="object-contain h-10 md:h-12 w-auto opacity-80 group-hover:opacity-100 transition-all duration-300 brightness-0 invert" 
             />
           </a>
         </div>
