@@ -20,24 +20,23 @@ export default function Navbar() {
   return (
     <header className="fixed top-4 md:top-6 left-0 w-full px-4 md:px-8 z-50 flex justify-between items-start pointer-events-none">
       
-      {/* 1. CÍRCULO DEL LOGO (Izquierda - ¡Ahora el triple de grande!) */}
+      {/* 1. CÍRCULO DEL LOGO (Izquierda) */}
       <Link 
         href="/" 
-        className="pointer-events-auto bg-[#F5F0E7]/95 backdrop-blur-md border-2 border-[#D7B98A]/50 rounded-full w-32 h-32 md:w-48 md:h-48 flex items-center justify-center shadow-2xl hover:scale-105 transition-transform duration-300"
+        className="pointer-events-auto bg-[#F5F0E7]/90 backdrop-blur-md border-2 border-[#D7B98A]/50 rounded-full w-32 h-32 md:w-48 md:h-48 flex items-center justify-center shadow-2xl hover:scale-105 transition-transform duration-300"
       >
         <Image 
-          src="/logo.png" 
+          src="/logo-transparente.png" // <-- AQUÍ ESTÁ TU NUEVO ARCHIVO
           alt="Corporación San Francisco" 
-          width={200} // Aumentamos el width/height base de Next.js
+          width={200} 
           height={200} 
           // w-28 (112px) en móvil, w-44 (176px) en escritorio
-          className="object-contain w-28 h-28 md:w-44 md:h-44" 
+          className="object-contain w-28 h-28 md:w-44 md:h-44 drop-shadow-md" 
           priority
         />
       </Link>
 
       {/* 2. BARRA DE BOTONES (Derecha - Escritorio) */}
-      {/* Le agregamos un margen superior (mt-4) para que quede alineada visualmente con el centro del círculo gigante */}
       <nav className="pointer-events-auto hidden lg:flex bg-[#F5F0E7]/90 backdrop-blur-md border border-[#D7B98A]/40 rounded-full px-4 py-2 shadow-xl items-center gap-1.5 mt-6">
         {links.map((link) => (
           <Link 
@@ -59,7 +58,6 @@ export default function Navbar() {
       </nav>
 
       {/* 3. BOTÓN MENÚ MÓVIL (Derecha - Celular) */}
-      {/* También le damos un margen superior para que no choque con el círculo */}
       <div className="pointer-events-auto lg:hidden mt-2">
         <button 
           onClick={() => setIsOpen(!isOpen)} 
