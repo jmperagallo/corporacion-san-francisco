@@ -20,34 +20,34 @@ export default function InstagramFeed() {
   }, []);
 
   return (
-    // Agregamos la imagen de fondo aquí (bg-[url])
-    <section className="py-16 md:py-24 bg-[url('/instagram-bg.jpg')] bg-cover bg-center bg-no-repeat relative overflow-hidden">
+    // Fondo de collage
+    <section className="py-20 bg-[url('/instagram-bg.jpg')] bg-cover bg-center bg-fixed relative overflow-hidden">
       
-      {/* Capa opcional: Un velo blanco muy sutil para que el texto resalte más sobre la textura */}
-      <div className="absolute inset-0 bg-marfil/40 pointer-events-none"></div>
+      {/* Velo sutil para mejorar la lectura */}
+      <div className="absolute inset-0 bg-marfil/60 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Encabezado de la sección */}
+        {/* Encabezado */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 md:mb-12"
+          className="text-center mb-10"
         >
-          <span className="text-terracota text-sm tracking-[0.2em] uppercase font-bold">
+          <span className="text-terracota text-sm tracking-[0.2em] uppercase font-bold bg-white/50 px-3 py-1 rounded-full backdrop-blur-sm">
             Síguenos
           </span>
-          <h2 className="text-3xl md:text-5xl text-cafe-patrimonial mt-2 font-bold drop-shadow-sm">
+          <h2 className="text-4xl md:text-5xl text-cafe-patrimonial mt-4 font-bold drop-shadow-md">
             Nuestro Instagram
           </h2>
-          <p className="text-cafe-patrimonial/80 mt-4 max-w-md mx-auto text-lg font-medium">
+          <p className="text-cafe-patrimonial/90 mt-3 max-w-md mx-auto text-lg font-semibold drop-shadow-sm">
             Lo que estamos creando en tiempo real
           </p>
         </motion.div>
 
-        {/* Contenedor del Feed de Instagram */}
+        {/* Contenedor del Feed - Quitamos el límite de ancho para que ocupe toda la pantalla */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ export default function InstagramFeed() {
           className="w-full flex justify-center"
         >
           <div
-            className="w-full max-w-4xl instagram-feed-wrapper"
+            className="w-full max-w-5xl instagram-feed-wrapper" // Aumentamos a max-w-5xl para que sea más ancho
             dangerouslySetInnerHTML={{
               __html: `
                 <blockquote 
@@ -64,14 +64,15 @@ export default function InstagramFeed() {
                   data-instgrm-permalink="https://www.instagram.com/corporacion_sanfrancisco/" 
                   data-instgrm-version="14" 
                   style="
-                    background: transparent; 
+                    background: #ffffff; 
                     border: none;
+                    border-radius: 16px;
                     padding: 0;
                     margin: 0 auto;
                     max-width: 100%;
                     width: 100%;
                     min-width: 0;
-                    box-shadow: none;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
                   "
                 >
                 </blockquote>
@@ -80,59 +81,46 @@ export default function InstagramFeed() {
           />
         </motion.div>
 
-        {/* Botón "Ver más" */}
+        {/* Botón */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-10 md:mt-14"
+          className="text-center mt-12"
         >
           <Link
             href="https://www.instagram.com/corporacion_sanfrancisco/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-marfil/80 backdrop-blur-sm border-2 border-terracota text-terracota px-8 py-3 rounded-full text-sm font-bold hover:bg-terracota hover:text-marfil transition-all shadow-md"
+            className="inline-block bg-terracota text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-cafe-patrimonial transition-all shadow-xl hover:scale-105"
           >
             Ver más en Instagram →
           </Link>
         </motion.div>
       </div>
 
-      {/* ========================================= */}
-      {/* CSS CRÍTICO: Fondo transparente para ver la imagen */}
-      {/* ========================================= */}
+      {/* CSS CRÍTICO: Forzar a Instagram a ser ancho y quitar cabecera */}
       <style jsx>{`
-        /* Hacemos que el fondo del iframe sea transparente */
+        /* 1. Hacemos que el iframe ocupe el 100% del ancho del contenedor */
+        .instagram-feed-wrapper :global(iframe) {
+          width: 100% !important;
+          min-width: 100% !important;
+          border-radius: 16px;
+        }
+        
+        /* 2. Quita los bordes por defecto del contenedor de Instagram */
         .instagram-feed-wrapper :global(.instagram-media) {
-          background: transparent !important;
           border: none !important;
           padding: 0 !important;
           margin: 0 !important;
-          box-shadow: none !important;
-        }
-        
-        /* Oculta la cabecera (foto de perfil, nombre, seguidores) */
-        .instagram-feed-wrapper :global(.instagram-media) > div:first-child {
-          display: none !important;
-        }
-        
-        /* Oculta el pie de página (botón de me gusta, comentarios) */
-        .instagram-feed-wrapper :global(.instagram-media) > div:last-child {
-          display: none !important;
-        }
-        
-        /* Fuerza a la cuadrícula de fotos a ocupar el 100% del ancho */
-        .instagram-feed-wrapper :global(.instagram-media) > div:nth-child(2) {
           width: 100% !important;
-          max-width: 100% !important;
         }
-        
-        /* Hace que cada foto sea responsiva y le da bordes redondeados */
-        .instagram-feed-wrapper :global(.instagram-media) img {
-          width: 100% !important;
-          height: auto !important;
-          border-radius: 12px;
+
+        /* 3. Intentar ocultar la cabecera (foto de perfil, nombre, seguidores) 
+              (Nota: Instagram cambia esto seguido, pero con esto intentamos taparlo) */
+        .instagram-feed-wrapper :global(.instagram-media) > div > div:first-child {
+          display: none !important;
         }
       `}</style>
     </section>
