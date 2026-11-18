@@ -7,28 +7,26 @@ import { motion } from "framer-motion";
 
 export default function InstagramFeed() {
   useEffect(() => {
-    // 1. Cargar el script oficial de Instagram si no existe
     if (!document.querySelector('script[src="//www.instagram.com/embed.js"]')) {
       const script = document.createElement("script");
       script.async = true;
       script.src = "//www.instagram.com/embed.js";
       document.body.appendChild(script);
     } else if ((window as any).instgrm) {
-      // Si el script ya existe, procesamos los embeds de nuevo
       (window as any).instgrm.Embeds.process();
     }
   }, []);
 
   return (
-    // 1. bg-no-repeat evita que la imagen se duplique
-    // 2. bg-cover la estira para cubrir todo (si quieres ver el marco completo, cambia bg-cover por bg-contain)
-    // 3. Quitamos bg-fixed para que no haya desplazamientos raros
-    <section className="py-20 bg-[url('/instagram-bg.jpg')] bg-cover bg-center bg-no-repeat relative overflow-hidden bg-marfil">
+    // 1. bg-marfil como color de respaldo si la imagen no cubre todo.
+    // 2. bg-cover en celular, bg-contain en PC (md:) para que no se corten los laterales.
+    // 3. min-h-screen para darle altura y que la imagen se luzca.
+    <section className="py-24 md:py-32 relative bg-[#F5F0E7] bg-[url('/instagram-bg.jpg')] bg-no-repeat bg-cover bg-center md:bg-contain min-h-screen flex flex-col justify-center overflow-hidden">
       
-      {/* Velo sutil para que el texto resalte sobre la textura */}
-      <div className="absolute inset-0 bg-marfil/60 pointer-events-none"></div>
+      {/* Un velo blanco MUY sutil solo en el centro para que el texto resalte sin opacar el marco */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F5F0E7]/60 to-transparent pointer-events-none"></div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
         {/* Encabezado */}
         <motion.div
@@ -38,7 +36,7 @@ export default function InstagramFeed() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <span className="text-terracota text-sm tracking-[0.2em] uppercase font-bold bg-white/70 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
+          <span className="text-terracota text-sm tracking-[0.2em] uppercase font-bold bg-white/80 px-4 py-1.5 rounded-full backdrop-blur-sm shadow-sm">
             Síguenos
           </span>
           <h2 className="text-4xl md:text-5xl text-cafe-patrimonial mt-4 font-bold drop-shadow-sm">
@@ -102,7 +100,7 @@ export default function InstagramFeed() {
         </motion.div>
       </div>
 
-      {/* CSS CRÍTICO: Forzar a Instagram a ser ancho y quitar cabecera */}
+      {/* CSS CRÍTICO para el Iframe de Instagram */}
       <style jsx>{`
         .instagram-feed-wrapper :global(iframe) {
           width: 100% !important;
@@ -115,10 +113,6 @@ export default function InstagramFeed() {
           padding: 0 !important;
           margin: 0 !important;
           width: 100% !important;
-        }
-
-        .instagram-feed-wrapper :global(.instagram-media) > div > div:first-child {
-          display: none !important;
         }
       `}</style>
     </section>
