@@ -18,11 +18,11 @@ export default function InstagramFeed() {
   }, []);
 
   return (
-    <section className="py-20 relative bg-[#F5F0E7] bg-[url('/instagram-bg.jpg')] bg-cover bg-center bg-no-repeat min-h-[85vh] flex flex-col justify-center overflow-hidden">
+    // Fondo: Controlamos la altura con min-h-[700px] y usamos bg-cover
+    <section className="relative py-20 bg-[#F5F0E7] bg-[url('/instagram-bg.jpg')] bg-cover bg-center bg-no-repeat min-h-[700px] flex flex-col justify-center overflow-hidden">
       
-      {/* Quitamos el degradado blanco pesado para que el marco se vea completo. 
-          Solo dejamos una sombra radial muy sutil en el centro para que el texto resalte. */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#F5F0E7]/80 via-transparent to-transparent pointer-events-none"></div>
+      {/* Capa para aclarar un poco el centro y asegurar que el texto se lea bien */}
+      <div className="absolute inset-0 bg-[#F5F0E7]/40 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
@@ -42,7 +42,7 @@ export default function InstagramFeed() {
           </h2>
         </motion.div>
 
-        {/* Contenedor del Feed - Hacemos que ocupe casi todo el ancho */}
+        {/* Contenedor del Feed - Volvemos al tamaño anterior (max-w-4xl) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -51,8 +51,7 @@ export default function InstagramFeed() {
           className="w-full flex justify-center"
         >
           <div
-            // Cambiamos max-w-5xl por max-w-7xl para que sea mucho más rectangular
-            className="w-full max-w-7xl instagram-feed-wrapper"
+            className="w-full max-w-4xl instagram-feed-wrapper"
             dangerouslySetInnerHTML={{
               __html: `
                 <blockquote 
@@ -68,7 +67,7 @@ export default function InstagramFeed() {
                     max-width: 100%;
                     width: 100%;
                     min-width: 0;
-                    box-shadow: 0 15px 35px rgba(89, 56, 47, 0.15);
+                    box-shadow: 0 10px 30px rgba(89, 56, 47, 0.15);
                   "
                 >
                 </blockquote>
@@ -96,13 +95,11 @@ export default function InstagramFeed() {
         </motion.div>
       </div>
 
-      {/* CSS CRÍTICO: Forzar a Instagram a ser ancho y alto */}
+      {/* CSS CRÍTICO: Quitamos el min-height de 600px para que no se estire */}
       <style jsx>{`
-        /* Forzamos al iframe a ocupar todo el ancho y le damos una altura mínima para que muestre más fotos */
         .instagram-feed-wrapper :global(iframe) {
           width: 100% !important;
           min-width: 100% !important;
-          min-height: 600px !important; /* Fuerza a que se estire hacia abajo */
           border-radius: 16px;
         }
         
