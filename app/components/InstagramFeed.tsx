@@ -18,10 +18,9 @@ export default function InstagramFeed() {
   }, []);
 
   return (
-    // Fondo completo: bg-cover para que llene toda la pantalla
     <section className="py-24 relative bg-[#F5F0E7] bg-[url('/instagram-bg.jpg')] bg-cover bg-center bg-no-repeat overflow-hidden">
       
-      {/* Velo sutil para que el texto resalte y las fotos de Instagram no se pierdan en la textura */}
+      {/* El velo blanco se mantiene para asegurar que el texto resalte */}
       <div className="absolute inset-0 bg-[#F5F0E7]/60 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -42,7 +41,7 @@ export default function InstagramFeed() {
           </h2>
         </motion.div>
 
-        {/* Contenedor del Feed - Tamaño intermedio (max-w-5xl) */}
+        {/* Contenedor del Feed */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,15 +58,14 @@ export default function InstagramFeed() {
                   data-instgrm-permalink="https://www.instagram.com/corporacion_sanfrancisco/" 
                   data-instgrm-version="14" 
                   style="
-                    background: #F5F0E7; /* Color Marfil para que la cabecera de Insta se fusione */
-                    border: 1px solid #D7B98A;
-                    border-radius: 16px;
+                    background: transparent; 
+                    border: none;
                     padding: 0;
                     margin: 0 auto;
                     max-width: 100%;
                     width: 100%;
                     min-width: 0;
-                    box-shadow: 0 15px 35px rgba(89, 56, 47, 0.2);
+                    box-shadow: none;
                   "
                 >
                 </blockquote>
@@ -95,15 +93,21 @@ export default function InstagramFeed() {
         </motion.div>
       </div>
 
+      {/* CSS CRÍTICO: Aquí está el truco para eliminar el fondo blanco */}
       <style jsx>{`
         .instagram-feed-wrapper :global(iframe) {
           width: 100% !important;
           min-width: 100% !important;
-          border-radius: 16px;
+          /* LA MAGIA: Esto fusiona el blanco de Instagram con tu collage */
+          mix-blend-mode: multiply; 
+          border-radius: 12px;
         }
         
         .instagram-feed-wrapper :global(.instagram-media) {
           width: 100% !important;
+          /* Quitamos el borde y la sombra para que parezca flotar en el papel */
+          border: none !important; 
+          box-shadow: none !important;
         }
       `}</style>
     </section>
