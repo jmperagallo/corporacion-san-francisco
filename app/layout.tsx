@@ -1,14 +1,22 @@
 // app/layout.tsx
 import type { Metadata } from "next";
+import { Great_Vibes } from "next/font/google"; // <-- Importamos la fuente
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+// Configuramos la fuente manuscrita
+const greatVibes = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-great-vibes", 
+});
+
 export const metadata: Metadata = {
   // 1. URL base para que las rutas de imágenes funcionen en redes sociales
-  metadataBase: new URL("https://corporacionsanfrancisco.cl"), // Recuerda cambiarlo por tu dominio o link de Vercel
+  metadataBase: new URL("https://corporacionsanfrancisco.cl"), 
   
-  // 2. Título con plantilla (las subpáginas heredarán el nombre de la corporación)
+  // 2. Título con plantilla
   title: {
     default: "Corporación San Francisco | Patrimonio y Comunidad en Valparaíso",
     template: "%s | Corporación San Francisco",
@@ -28,7 +36,7 @@ export const metadata: Metadata = {
     "Cultura Cerro Barón",
   ],
 
-  // 5. Instrucciones para los robots de búsqueda (Google, Bing, etc.)
+  // 5. Instrucciones para los robots de búsqueda
   robots: {
     index: true,
     follow: true,
@@ -41,7 +49,7 @@ export const metadata: Metadata = {
     },
   },
 
-  // 6. Open Graph (Para que se vea bonito al compartir en WhatsApp, Facebook o LinkedIn)
+  // 6. Open Graph
   openGraph: {
     title: "Corporación San Francisco | Patrimonio y Comunidad",
     description: "Raíces en Barón, proyección al mundo. Gestión del patrimonio y la comunidad franciscana en Valparaíso.",
@@ -49,7 +57,7 @@ export const metadata: Metadata = {
     siteName: "Corporación San Francisco",
     images: [
       {
-        url: "/Templo_SFB.jpg", // Asegúrate de que esta foto esté en la carpeta public
+        url: "/Templo_SFB.jpg", 
         width: 1200,
         height: 630,
         alt: "Vista aérea del Templo San Francisco del Cerro Barón",
@@ -59,7 +67,7 @@ export const metadata: Metadata = {
     type: "website",
   },
 
-  // 7. Twitter Card (Para cuando compartan el enlace en X/Twitter)
+  // 7. Twitter Card
   twitter: {
     card: "summary_large_image",
     title: "Corporación San Francisco | Patrimonio y Comunidad",
@@ -74,7 +82,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    // Inyectamos la variable de la fuente en el HTML
+    <html lang="es" className={`${greatVibes.variable}`}>
       <body className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">

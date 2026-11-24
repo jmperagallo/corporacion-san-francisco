@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       
-      {/* 1. HERO SECTION (Pantalla completa) */}
+      {/* 1. HERO SECTION (Portada principal) */}
       <section className="relative text-marfil min-h-screen flex items-center overflow-hidden">
         
         {/* Imagen de Fondo Rectangular */}
@@ -21,21 +21,34 @@ export default function Home() {
             className="object-cover object-center" 
             priority
           />
-          {/* Capa oscura semitransparente para que el texto se lea bien */}
+          {/* Capa oscura semitransparente */}
           <div className="absolute inset-0 bg-black/40"></div>
-          {/* Degradado sutil en la parte inferior para que se funda con la ola */}
+          {/* Degradado para fundir con la ola */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-cafe-patrimonial/90"></div>
         </div>
 
-        {/* Contenido (Texto y Botones) */}
-        <div className="max-w-7xl mx-auto px-4 relative z-10 text-center w-full pt-24">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight drop-shadow-2xl">
-            Corporación<br/>
-            <span className="text-arena drop-shadow-lg">San Francisco</span>
+        {/* Contenido del Hero */}
+        <div className="max-w-7xl mx-auto px-4 relative z-10 text-center w-full pt-24 flex flex-col items-center">
+          
+          {/* Texto Superior */}
+          <span className="text-xl md:text-2xl font-medium tracking-[0.4em] uppercase drop-shadow-lg text-marfil mb-2">
+            Corporación
+          </span>
+
+          {/* Nombre Principal (Fuente Manuscrita Great Vibes) */}
+          <h1 
+            className="text-7xl md:text-9xl text-arena drop-shadow-2xl mb-4" 
+            style={{ fontFamily: 'var(--font-great-vibes)' }}
+          >
+            San Francisco
           </h1>
-          <p className="text-xl md:text-2xl text-marfil/90 max-w-2xl mx-auto mb-10 font-medium drop-shadow-lg">
-            Raíces en Barón, proyección al mundo. Gestión del patrimonio y la comunidad franciscana.
-          </p>
+
+          {/* Texto Inferior (Cerro Barón) */}
+          <span className="text-2xl md:text-4xl font-medium tracking-[0.3em] uppercase drop-shadow-lg text-marfil mb-10">
+            Cerro Barón
+          </span>
+
+          {/* Botones */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/agenda" className="bg-terracota text-white px-8 py-3 rounded-full font-semibold hover:bg-arena hover:text-cafe-patrimonial transition-all shadow-xl">
               Ver Agenda Cultural
@@ -47,7 +60,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 2. OLA ANIMADA (Transición) */}
+      {/* 2. OLA ANIMADA */}
       <WaveDivider />
 
       {/* 3. GALERÍA DE FOTOS */}
