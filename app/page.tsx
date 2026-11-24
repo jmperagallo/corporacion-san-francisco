@@ -9,10 +9,9 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       
-      {/* 1. HERO SECTION (Portada principal) */}
+      {/* 1. HERO SECTION */}
       <section className="relative text-marfil min-h-screen flex items-center overflow-hidden">
         
-        {/* Imagen de Fondo Rectangular */}
         <div className="absolute inset-0">
           <Image
             src="/Templo_SFB.jpg" 
@@ -21,32 +20,26 @@ export default function Home() {
             className="object-cover object-center" 
             priority
           />
-          {/* Capa oscura semitransparente */}
           <div className="absolute inset-0 bg-black/40"></div>
-          {/* Degradado para fundir con la ola */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-cafe-patrimonial/90"></div>
         </div>
 
         {/* Contenido del Hero */}
         <div className="max-w-7xl mx-auto px-4 relative z-10 text-center w-full pt-24 flex flex-col items-center">
           
-          {/* Texto Superior */}
-          <span className="text-xl md:text-2xl font-medium tracking-[0.4em] uppercase drop-shadow-lg text-marfil mb-2">
-            Corporación
-          </span>
-
-          {/* Nombre Principal (Fuente Manuscrita Great Vibes) */}
-          <h1 
-            className="text-7xl md:text-9xl text-arena drop-shadow-2xl mb-4" 
-            style={{ fontFamily: 'var(--font-great-vibes)' }}
-          >
-            San Francisco
+          {/* 1. Estilo Original (Calibri - Manual de Marca) */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight drop-shadow-xl">
+            Corporación<br/>
+            <span className="text-arena">San Francisco</span>
           </h1>
 
-          {/* Texto Inferior (Cerro Barón) */}
-          <span className="text-2xl md:text-4xl font-medium tracking-[0.3em] uppercase drop-shadow-lg text-marfil mb-10">
+          {/* 2. Estilo Manuscrito (Cerro Barón con iniciales mayúsculas) */}
+          <h2 
+            className="text-6xl md:text-8xl text-marfil drop-shadow-2xl mb-12" 
+            style={{ fontFamily: 'var(--font-great-vibes)' }}
+          >
             Cerro Barón
-          </span>
+          </h2>
 
           {/* Botones */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
